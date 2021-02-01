@@ -1,7 +1,7 @@
-function randomLetter() {
+function randomizer() {
     let alphabet = "abcdefghijklmnopqrstuvwxyz";
     let letters = "";
-    
+
     while (letters.length < 6) {
         letters += alphabet[Math.floor(Math.random() * alphabet.length)];
     }
@@ -19,71 +19,64 @@ function toUnderscore() {
     return answer;
 }
 
-function alertPlayer() {
+function alertAnswer() {
     alert(answer.join(" "));
 }
 
-function getInput() {
-    return prompt("Please enter a letter here");
+function alertGuesses() {
+    alert(guessCounter);
 }
 
+function userInput() {
+    return prompt("Please inter a guess");
+}
 
-
-function gameStatus(guess) {
-   // let counter = 0;
+function validGuess(guess) {
     if (!answer.includes(guess)) {
-        guessCounter--; //undefined
+        guessCounter--;
         for (let i = 0; i < letters.length; i++) {
             if (guess === letters[i]) {
                 answer[i] = guess;
-                lettersLeft--; 
-               // counter++; 
+                lettersLeft--;
             }
         }
     }
-   // return counter;
-} 
+}
 
-/*
- for (let i = 0;)
-*/
-
-function showOutcome() {
-    alert(`Nice job, you have ${answer.join(" ")}`);
+function gameEnd() {
+    alert(`Great job, you have ${answer.join(" ")}`);
     alert(`The letters are ${letters}`);
 }
 
-let letters = randomLetter();
+let letters = randomizer();
 
-let answer = toUnderscore(letters);
+let answer = toUnderscore();
 
 let lettersLeft = letters.length;
 
 let guessCounter = letters.length + 10;
 
-while (lettersLeft > 0) {
-    alertPlayer(answer);
+while(lettersLeft > 0) {
+    alertAnswer();
 
-    alert(guessCounter);
+    alertGuesses();
 
-    let guess = getInput();
+    let guess = userInput();
 
-     if (guess === null) {
+    if (guess === null) {
         break;
-     } else if (guess.length !== 1) {
-        alert("Please input exactly one letter");
-     } else {
-       gameStatus(guess);
-       // lettersLeft -= correctGuess;
-     }
+    } else if (guess.length !== 1) {
+        alert("Please enter in exactly one letter");
+    } else {
+        validGuess(guess);
+    }
 
-     if (guessCounter === 0) {
+    if (guessCounter === 0) {
         break;
-     }
+    }
 }
 
-showOutcome(answer, letters);
-
+gameEnd();
 
 /*function helloName(n) {
   return n = "hello " + n
@@ -100,13 +93,10 @@ console.log(name, "==> hello name1")
 
 // When variables go inside a function they don't change, unless you return it and save it back to the variable 
 
-
 function updateName() {
   myVar = "update  " + myVar;
   myLet = "update  " + myLet;
 }
-
-
 
 var myVar = "myVar"
 let myLet = "myLet"
@@ -121,21 +111,6 @@ updateName();
 console.log(myVar, " ===> update myvar")
 console.log(myLet, " ===> update udef")
 
-
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-/*
  returning multiple things with a return keyword
  return {
                   answer,
